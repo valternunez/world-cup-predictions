@@ -71,7 +71,7 @@ class UserGroup(models.Model):
 class UserKnockout(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     phase = models.CharField(max_length=10, choices=KNOCKOUT_CHOICES)
-    team_a = models.ForeignKey('Team', on_delete=models.CASCADE, related_name='team_a__user_knockout')
+    team_a = models.ForeignKey('Team', on_delete=models.CASCADE, related_name='team_a_user_knockout')
     team_b = models.ForeignKey('Team', on_delete=models.CASCADE, related_name='team_b_user_knockout')
     winner = models.BooleanField()
 
@@ -89,7 +89,7 @@ class Knockout(models.Model):
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     question_type = models.CharField(max_length=30, choices=QUESTION_CHOICES)
-    value = models.IntegerField()
+    value = models.IntegerField(blank=True)
     answer_player = models.ForeignKey(Player, on_delete=models.CASCADE, blank=True)
     answer_team = models.ForeignKey(Team, on_delete=models.CASCADE, blank=True)
     answer_text = models.CharField(max_length=1000, blank=True)
